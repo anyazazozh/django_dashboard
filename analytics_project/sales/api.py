@@ -15,6 +15,9 @@ from .serializers import (
 class ReportCreateListViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
     queryset = Report.objects.all()
@@ -24,6 +27,9 @@ class ReportCreateListViewSet(
 class SellerCreateListViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
     queryset = Seller.objects.all()
@@ -33,6 +39,9 @@ class SellerCreateListViewSet(
 class BrandCreateListViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
     queryset = Brand.objects.all()
@@ -42,7 +51,10 @@ class BrandCreateListViewSet(
 class ReportTypeCreateListViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
     queryset = ReportType.objects.all()
-    serializer_class = ReportTypeSerializer 
+    serializer_class = ReportTypeSerializer

@@ -115,7 +115,7 @@ fact_gr.drop(['Маржа'] ,axis = 1, inplace = True)
 
 # загружаем результирующую таблицу в csv файл
 
-fact_gr.to_csv('fact.csv', encoding = 'utf-8', sep = ';',index=False)
+fact_gr.to_csv('fact.csv', encoding = 'utf-8', sep = ',',index=False)
 
 # ## План
 
@@ -146,12 +146,12 @@ cal_plan1['Количество'] = 0
 
 # сохраняем итоговую таблицу в csv файл
 
-cal_plan1.to_csv('plan.csv', encoding = 'utf-8', sep = ';',index=False)
+cal_plan1.to_csv('plan.csv', encoding = 'utf-8', sep = ',',index=False)
 
 # ## Прогноз
 
 cal = pd.read_excel("data_source.xlsx", sheet_name = 'Календарь для прогноза')
-df_f = pd.read_csv("fact.csv", sep = ';', encoding = 'utf-8')
+df_f = pd.read_csv("fact.csv", sep = ',', encoding = 'utf-8')
 
 # создаем вспомогательные столбцы чтобы потом сделать cross join 
 
@@ -192,11 +192,11 @@ cal2.rename(columns = {'Стоимость_x':'Стоимость','Валовы
 
 # сохраняем результирующую таблицу в csv файл
 
-cal2.to_csv('forecast.csv', encoding = 'utf-8', sep = ';',index=False)
+cal2.to_csv('forecast.csv', encoding = 'utf-8', sep = ',',index=False)
 
 all_df = pd.concat([cal2,cal_plan1,fact_gr])
 
-seller = pd.DataFrame({'seller_name': ['Вайлдберриз', 'ОЗОН', 'ИМ', 'Ламода'], 'seller_id': [1, 2, 3, 4]})
+seller = pd.DataFrame({'seller_name': ['ИМ', 'ОЗОН', 'Вайлдберриз', 'Ламода'], 'seller_id': [1, 2, 3, 4]})
 brand = pd.DataFrame({'brand_name': ['Salamander', 'Thomas Munz', 'ПТМ'], 'brand_id': [1, 2, 3]})
 report_type = pd.DataFrame({'type_name': ['Прогноз', 'План', 'Факт'], 'type_id': [1, 2, 3]})
 
@@ -205,5 +205,9 @@ all_df = all_df.merge(brand,how = 'left', left_on = ['ТМ'],right_on = ['brand_
 all_df = all_df.merge(report_type,how = 'left', left_on = ['Тип'],right_on = ['type_name']).drop(['Тип', 'type_name'],axis = 1)
 all_df.drop(['Количество'],axis = 1, inplace=True)
 
-all_df.to_csv('all_df.csv', encoding = 'utf-8', sep = ';',index=False)
+all_df.to_csv('all_df.csv', encoding = 'utf-8', sep = ',',  index=False)
+seller.to_csv('seller.csv', encoding = 'utf-8', sep = ',',index=False)
+brand.to_csv('brand.csv', encoding = 'utf-8', sep = ',',index=False)
+report_type.to_csv('report_type.csv', encoding = 'utf-8', sep = ',',index=False)
+
 
